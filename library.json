@@ -1,0 +1,29 @@
+{
+    "name": "Manchester-codec",
+    "version": "1.0.0",
+    "description": "This module implement encoder and decoder functions for bit buffer of the Manchester code by G. E. Thomas.",
+    "keywords": "codec, encoder, decoder",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bankoViktor/manchester-codec.git"
+    },
+    "authors": [
+        {
+            "name": "Viktor Banko S.",
+            "email": "bankviktor14@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*",
+    "headers": "manchester_codec.h",
+    "export": {
+        "exclude": [
+            ".vscode",
+            "examples",
+            "test",
+            "*.md",
+            "*.ini"
+        ]
+    }
+}
