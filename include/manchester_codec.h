@@ -29,11 +29,11 @@
 // Not enough lenght of the destination bit buffer
 #define MANCHESTER_ERR_NOT_ENOUGH_DST_BUFFER_LEN -3
 
-// Wrong  bit combination in the source bit buffer
+// Wrong bit combination in the source bit buffer
 #define MANCHESTER_ERR_WRONG_BIT_COMBINATION -4
 
-// Not implemented function
-#define MANCHESTER_ERR_NOT_IMPLEMENTED -99
+// Source and destination bit buffers same
+#define MANCHESTER_ERR_SRC_AND_DST_SAME -5
 
 // Public Function Declarations -----------------------------------------------
 

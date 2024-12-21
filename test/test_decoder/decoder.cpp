@@ -9,7 +9,7 @@ void args_src_buffer_ptr_null()
 	size_t nDstBitCount = 256;
 	int16_t wState;
 
-	wState = manchester_decode(0, nSrcBitCountRight, abDst, &nDstBitCount, 0);
+	wState = manchester_decode(0, nEncodedBitCountRight, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_ERR_INVALID_ARGS, wState, "Null pointer to Src bit buffer.");
 }
 
@@ -20,15 +20,15 @@ void args_src_buffer_len()
 	int16_t wState;
 
 	nDstBitCount = 256;
-	wState = manchester_decode(abSrcRight, 0, abDst, &nDstBitCount, 0);
+	wState = manchester_decode(abEncodedRight, 0, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_ERR_INVALID_ARGS, wState, "Zero length of Src bit buffer.");
 
 	nDstBitCount = 256;
-	wState = manchester_decode(abSrcRight, 2, abDst, &nDstBitCount, 0);
+	wState = manchester_decode(abEncodedRight, 2, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_SUCCESS, wState, "Min length of Src bit buffer.");
 
 	nDstBitCount = 256;
-	wState = manchester_decode(abSrcRight, nSrcBitCountRight, abDst, &nDstBitCount, 0);
+	wState = manchester_decode(abEncodedRight, nEncodedBitCountRight, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_SUCCESS, wState, "Positive length of Src bit buffer.");
 }
 
@@ -38,35 +38,35 @@ void args_src_buffer_len_odd()
 	size_t nDstBitCount = 256;
 	int16_t wState;
 
-	wState = manchester_decode(abSrcRight, 13, abDst, &nDstBitCount, 0);
+	wState = manchester_decode(abEncodedRight, 13, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_ERR_ODD_BIT_COUNT, wState, "Odd length of Src bit buffer.");
 }
 
 void args_src_buffer_wrong_bit_combination_00()
 {
-	uint8_t abSrc[128] = {};
-	size_t nSrcBytes = (size_t)ceil(nSrcBitCountRight / 8.0);
+	uint8_t abDecoded[128] = {};
+	size_t nSrcBytes = (size_t)ceil(nEncodedBitCountRight / 8.0);
 	uint8_t abDst[32] = {};
 	size_t nDstBitCount = 256;
 	int16_t wState;
 
-	memcpy(abSrc, abDstRight, nSrcBytes);
-	abSrc[3] |= 0x00;
-	wState = manchester_decode(abSrc, nSrcBitCountRight, abDst, &nDstBitCount, 0);
+	memcpy(abDecoded, abDecodedRight, nSrcBytes);
+	abDecoded[3] |= 0x00;
+	wState = manchester_decode(abDecoded, nEncodedBitCountRight, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_ERR_WRONG_BIT_COMBINATION, wState, "Wrong combination 0b00.");
 }
 
 void args_src_buffer_wrong_bit_combination_11()
 {
-	uint8_t abSrc[128] = {};
-	size_t nSrcBytes = (size_t)ceil(nSrcBitCountRight / 8.0);
+	uint8_t abDecoded[128] = {};
+	size_t nSrcBytes = (size_t)ceil(nEncodedBitCountRight / 8.0);
 	uint8_t abDst[32] = {};
 	size_t nDstBitCount = 256;
 	int16_t wState;
 
-	memcpy(abSrc, abDstRight, nSrcBytes);
-	abSrc[3] |= 0x03;
-	wState = manchester_decode(abSrc, nSrcBitCountRight, abDst, &nDstBitCount, 0);
+	memcpy(abDecoded, abDecodedRight, nSrcBytes);
+	abDecoded[3] |= 0x03;
+	wState = manchester_decode(abDecoded, nEncodedBitCountRight, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_ERR_WRONG_BIT_COMBINATION, wState, "Wrong combination 0b11.");
 }
 
@@ -76,7 +76,7 @@ void args_dst_buffer_ptr_null()
 	size_t nDstBitCount = 256;
 	int16_t wState;
 
-	wState = manchester_decode(abSrcRight, nSrcBitCountRight, 0, &nDstBitCount, 0);
+	wState = manchester_decode(abEncodedRight, nEncodedBitCountRight, 0, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_ERR_INVALID_ARGS, wState, "Null pointer to Dst bit buffer.");
 }
 
@@ -86,12 +86,12 @@ void args_dst_buffer_len_more_than_src_buffer_len()
 	size_t nDstBitCount;
 	int16_t wState;
 
-	nDstBitCount = 50;
-	wState = manchester_decode(abSrcRight, nSrcBitCountRight, abDst, &nDstBitCount, 0);
+	nDstBitCount = nEncodedBitCountRight / 2 - 10;
+	wState = manchester_decode(abEncodedRight, nEncodedBitCountRight, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_ERR_NOT_ENOUGH_DST_BUFFER_LEN, wState, "Dst bit buffer len less than needed.");
 
 	nDstBitCount = 500;
-	wState = manchester_decode(abSrcRight, nSrcBitCountRight, abDst, &nDstBitCount, 0);
+	wState = manchester_decode(abEncodedRight, nEncodedBitCountRight, abDst, &nDstBitCount, 0);
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_SUCCESS, wState, "Dst bit buffer len enough.");
 }
 
@@ -101,17 +101,17 @@ void correct_result()
 	size_t nDstBitCount = 256;
 	int16_t wState;
 
-	wState = manchester_decode(abSrcRight, nSrcBitCountRight, abDst, &nDstBitCount, 0);
+	wState = manchester_decode(abEncodedRight, nEncodedBitCountRight, abDst, &nDstBitCount, 0);
 
 	// Check state value
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_SUCCESS, wState, "Decode failed.");
 
 	// Check decoded bit count equals
-	TEST_ASSERT_EQUAL_size_t_MESSAGE(nSrcBitCountRight / 2, nDstBitCount, "Dst bit buffer length not expected.");
+	TEST_ASSERT_EQUAL_size_t_MESSAGE(nEncodedBitCountRight / 2, nDstBitCount, "Dst bit buffer length not expected.");
 
 	// Check decoded buffer equals
-	size_t nDstBytes = (size_t)ceil(nDstBitCountRight / 8.0);
-	TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(abDstRight, abDst, nDstBytes, "Src & Dst bit buffer mismatch.");
+	size_t nDstBytes = (size_t)ceil(nDecodedBitCountRight / 8.0);
+	TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(abDecodedRight, abDst, nDstBytes, "Dst bit buffer not correct.");
 }
 
 void correct_result_inverse()
@@ -120,17 +120,17 @@ void correct_result_inverse()
 	size_t nDstBitCount = 256;
 	int16_t wState;
 
-	wState = manchester_decode(abSrcRight, nSrcBitCountRight, abDst, &nDstBitCount, 1);
+	wState = manchester_decode(abEncodedRight, nEncodedBitCountRight, abDst, &nDstBitCount, 1);
 
 	// Check state value
 	TEST_ASSERT_EQUAL_INT16_MESSAGE(MANCHESTER_SUCCESS, wState, "Decode failed.");
 
 	// Check decoded bit count equals
-	TEST_ASSERT_EQUAL_size_t_MESSAGE(nSrcBitCountRight / 2, nDstBitCount, "Dst bit buffer length not expected.");
+	TEST_ASSERT_EQUAL_size_t_MESSAGE(nEncodedBitCountRight / 2, nDstBitCount, "Dst bit buffer length not expected.");
 
 	// Check decoded buffer equals
-	size_t nDstBytes = (size_t)ceil(nDstBitCountRight / 8.0);
-	TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(abDstRightInversed, abDst, nDstBytes, "Src & Dst bit buffer mismatch.");
+	size_t nDstBytes = (size_t)ceil(nDecodedBitCountRight / 8.0);
+	TEST_ASSERT_EQUAL_UINT8_ARRAY_MESSAGE(abDecodedRightInversed, abDst, nDstBytes, "Dst bit buffer not correct.");
 }
 
 void setUp() {}

@@ -4,11 +4,11 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-extern const uint8_t abSrcRight[];
-extern const size_t nSrcBitCountRight;
+extern const size_t nEncodedBitCountRight;
+extern const size_t nDecodedBitCountRight;
 
-extern const uint8_t abDstRight[];
-extern const uint8_t abDstRightInversed[];
-extern const size_t nDstBitCountRight;
+extern const uint8_t abEncodedRight[];
+extern const uint8_t abDecodedRight[];
+extern const uint8_t abDecodedRightInversed[];
 
 #endif
