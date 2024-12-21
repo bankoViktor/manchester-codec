@@ -1,6 +1,6 @@
 # Release Notes
 
-## [v1.1.0](https://github.com/bankoViktor/manchester-codec/releases/tag/v1.1.0) (2024-12-02)
+## [v1.1.0](https://github.com/bankoViktor/manchester-codec/releases/tag/v1.1.0) (2024-12-22)
 
 ### New Features
 - Added Encode fuction.
