@@ -29,11 +29,11 @@
 // Not enough lenght of the destination bit buffer
 #define MANCHESTER_ERR_NOT_ENOUGH_DST_BUFFER_LEN -3
 
-// Wrong  bit combination in the source bit buffer
+// Wrong bit combination in the source bit buffer
 #define MANCHESTER_ERR_WRONG_BIT_COMBINATION -4
 
-// Not implemented function
-#define MANCHESTER_ERR_NOT_IMPLEMENTED -99
+// Source and destination bit buffers same
+#define MANCHESTER_ERR_SRC_AND_DST_SAME -5
 
 // Public Function Declarations -----------------------------------------------
 
@@ -47,11 +47,11 @@
  * @return Error code or 0 for success. Use macros starts with MANCHESTER_SUCCESS for success and MANCHESTER_ERR_* for error codes.
  */
 int16_t manchester_encode(
-	const uint8_t *pabSrc,
-	size_t nSrcBitCount,
-	uint8_t *pabDst,
-	size_t *pnDstBitCount,
-	uint32_t xOutBitInverse);
+    const uint8_t *pabSrc,
+    size_t nSrcBitCount,
+    uint8_t *pabDst,
+    size_t *pnDstBitCount,
+    uint32_t xOutBitInverse);
 
 /**
  * @brief Decode Manchester code in the source bit buffer and write decoded bits to the destination bit buffer.
@@ -63,11 +63,11 @@ int16_t manchester_encode(
  * @return Error code or 0 for success. Use macros starts with MANCHESTER_SUCCESS for success and MANCHESTER_ERR_* for error codes.
  */
 int16_t manchester_decode(
-	const uint8_t *pabSrc,
-	size_t nSrcBitCount,
-	uint8_t *pabDst,
-	size_t *pnDstBitCount,
-	uint32_t xOutBitInverse);
+    const uint8_t *pabSrc,
+    size_t nSrcBitCount,
+    uint8_t *pabDst,
+    size_t *pnDstBitCount,
+    uint32_t xOutBitInverse);
 
 #endif
 

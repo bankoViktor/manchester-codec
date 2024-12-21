@@ -8,17 +8,17 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "D:/Source/espressif/esp32/manchester_codec/include",
-                "D:/Source/espressif/esp32/manchester_codec/src",
-                "D:/Source/espressif/esp32/manchester_codec/.pio/libdeps/tests/Unity/src",
+                "D:/Projects/TPMS/Firmware/manchester_codec/include",
+                "D:/Projects/TPMS/Firmware/manchester_codec/src",
+                "D:/Projects/TPMS/Firmware/manchester_codec/.pio/libdeps/native/Unity/src",
                 ""
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "D:/Source/espressif/esp32/manchester_codec/include",
-                    "D:/Source/espressif/esp32/manchester_codec/src",
-                    "D:/Source/espressif/esp32/manchester_codec/.pio/libdeps/tests/Unity/src",
+                    "D:/Projects/TPMS/Firmware/manchester_codec/include",
+                    "D:/Projects/TPMS/Firmware/manchester_codec/src",
+                    "D:/Projects/TPMS/Firmware/manchester_codec/.pio/libdeps/native/Unity/src",
                     ""
                 ]
             },

@@ -1,6 +1,6 @@
 {
     "name": "Manchester-codec",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "This module implement encoder and decoder functions for bit buffer of the Manchester code by G. E. Thomas.",
     "keywords": "codec, encoder, decoder",
     "repository": {
