@@ -37,6 +37,10 @@
 
 // Public Function Declarations -----------------------------------------------
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Encode bytes in the source bit buffer and write encoded Manchester code bits to the destination bit buffer.
  * @param pabSrc [In] Pointer to the source bit buffer
@@ -68,6 +72,10 @@ int16_t manchester_decode(
     uint8_t *pabDst,
     size_t *pnDstBitCount,
     uint32_t xOutBitInverse);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -1,6 +1,6 @@
 /**
  ******************************************************************************
- * @file    manchester_codec.cpp
+ * @file    manchester_codec.c
  * @author  Viktor Banko S. (bankviktor14@gmail.com)
  * @date    2024-11-28
  * @brief   Source file for codec of the Manchester code.
